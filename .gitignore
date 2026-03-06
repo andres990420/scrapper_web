@@ -1,3 +1,4 @@
 /.env
 /.venv
 /clasificados_cars.json
+/__pycache__
