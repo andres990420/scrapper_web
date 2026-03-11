@@ -1,7 +1,7 @@
 import re
 from utils.utils import check_url_clasificadosonline
 from model.temporizador import Temporizador
-from scrappers.clasificadosonline.main_clasificados import scraping_clasifiadosonline
+from scrappers.clasificadosonline.main_scrapper import scraping_clasifiadosonline
 
 def main_clasificadosonline():
     stop_scrap = False
@@ -21,15 +21,4 @@ def main_clasificadosonline():
                 elif re.search(patter_yes_confirmation, response, re.IGNORECASE):
                     valid_response = True
                 else: print("Invalid response")
-
-
-
-        # if not re.match(r'^https://www\.clasificadosonline\.com/UD(?:RentalsListing|REListing)(?:Adv)?\.asp\?[^"\'\s]+', URL.strip()):
-        #     print("Invalid URL format. Please enter a valid URL.")
-        #     continue
-        # else:
-        #     print(f"<----- Preparing the scraping ... ----->")                         
-        #     # with Temporizador():
-        #     #     scraping_clasifiadosonline(URL.strip())
-            
             
