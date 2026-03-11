@@ -6,12 +6,12 @@ from pathlib import Path
 from scrappers.clasificadosonline.create_folder_for_urls import create_folders
 from helpers.helpers import HEADERS, BASE_URL_CLASIFICADOSONLINE
 
-WHITELIST_FILE = Path.cwd() / "whitelist.txt"
+WHITELIST_FILE = Path.cwd()/"scrappers"/"clasificadosonline"/"whitelist.txt"
+
 
 def scraping_clasifiadosonline(URL):
     list_urls = []
     list_properties = []
-    
     # Revisamos si la url tiene el parametro "offset=0" para saber si existe mas de una pagina de resultados, 
     # si no lo tiene, significa que solo tiene 1 pagina de resultados para hacer scraping de las urls 
     # y se procede a comparar con la whitelist de urls para añadir las nuevas urls y crear las carpetas para cada propiedad.

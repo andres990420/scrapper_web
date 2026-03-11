@@ -1,7 +1,7 @@
 import re
 from utils.utils import check_url_clasificadosonline
 from model.temporizador import Temporizador
-from scrappers.clasificadosonline.scraper import scraping_clasifiadosonline
+from scrappers.clasificadosonline.main_clasificados import scraping_clasifiadosonline
 
 def main_clasificadosonline():
     stop_scrap = False

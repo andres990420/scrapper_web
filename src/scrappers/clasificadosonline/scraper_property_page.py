@@ -49,9 +49,11 @@ def _scrape_info(soup, type):
         return info
     else:
 
-        price_info = soup.find("span", class_ = "Ver11C").strong.get_text(' ',strip=True) # Busqueda del precio de la propiedad
-        info["price"] = price_info
-    
+        price_info = soup.find_all("span", class_ = "Ver11C") # Busqueda del precio de la propiedad
+        for i in price_info:
+            if i.get_text(' ',strip=True).startswith('$'):
+                info["price"] = i.strong.get_text(' ',strip=True)
+
         info_list = soup.find_all("div", class_="Roboto Size14") # Busqueda de info de cuartos, baños
         for element in info_list:
             if not element.a:
@@ -59,7 +61,10 @@ def _scrape_info(soup, type):
                     if i.get_text(' ',strip=True).startswith("Cuartos"):
                         info["bedrooms"] = i.next.get_text(' ',strip=True).replace("-", "").strip()
                     elif i.get_text(' ',strip=True).startswith("Baños"):
-                        info["bathrooms"] = i.strong.get_text(' ',strip=True).replace("-", "").strip()
+                        try:
+                            info["bathrooms"] = i.strong.get_text(' ',strip=True).replace("-", "").strip()
+                        except(AttributeError):
+                            info["bathrooms"] = i.next.get_text(' ',strip=True).replace("-", "").strip()
         
         info_agent = soup.find_all("div", class_="translate", style="padding-left:8px") # Busqueda de info de license/agent
         for element in info_agent:
@@ -128,6 +133,7 @@ def scrape_page_clasificados(url):
 
 
 if __name__ == "__main__":
-    URL = "https://www.clasificadosonline.com/UDRealEstateDetail.asp?ID=4815016"
+    URL = "https://www.clasificadosonline.com/UDRealEstateDetail.asp?ID=4885122"
+    # URL = "https://www.clasificadosonline.com/UDRealEstateDetail.asp?ID=4883637"
     propiedad = scrape_page_clasificados(URL)
     print(propiedad)
